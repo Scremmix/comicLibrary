@@ -2,7 +2,12 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ComicLibrary" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/orangeLight</item>
+        <item name="colorPrimaryDark">@color/orangeDark</item>
+        <item name="colorAccent">@color/tealLight</item>
+
+        <item name="plainTextColor">@color/black</item>
+        <item name="buttonTextColor">@color/white</item>
     </style>
 
     <style name="Theme.ComicLibrary" parent="Base.Theme.ComicLibrary" />

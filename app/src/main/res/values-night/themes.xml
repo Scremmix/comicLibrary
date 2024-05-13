@@ -2,6 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ComicLibrary" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/tealDark</item>
+        <item name="colorPrimaryDark">@color/tealDark</item>
+        <item name="colorAccent">@color/orangeLight</item>
+
+        <item name="plainTextColor">@color/white</item>
+        <item name="buttonTextColor">@color/white</item>
     </style>
 </resources>

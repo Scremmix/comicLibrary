@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loginExecText">Login</string>
+    <string name="toRegisterText">Registrati ora!</string>
+    <string name="toRegisterHint">Non possiedi un account?</string>
+</resources>
