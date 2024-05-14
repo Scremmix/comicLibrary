@@ -1,5 +1,6 @@
 package com.example.comiclibrary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun toRegister(view: View)
     {
-        Toast.makeText(this, "Hai premuto sul bottone di register!", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this,RegisterActivity::class.java))
     }
 }

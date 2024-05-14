@@ -3,4 +3,12 @@
     <string name="loginExecText">Login</string>
     <string name="toRegisterText">Register now!</string>
     <string name="toRegisterHint">Don\'t have an account yet?</string>
+    <string name="registerExec">Register</string>
+    <string name="toLoginHint">Already have an account?</string>
+    <string name="toLoginText">Back to login</string>
+    <string name="registerPWCreate">Create password</string>
+    <string name="registerPWConfirm">Confirm password</string>
+    <string name="loginEmail">E-mail</string>
+    <string name="loginPW">Password</string>
+    <string name="registerEmail">Enter e-mail</string>
 </resources>

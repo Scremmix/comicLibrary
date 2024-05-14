@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <EditText
         android:id="@+id/emailBoxRegister"
         android:layout_width="0dp"
         android:layout_height="55sp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="50dp"
         android:drawableLeft="@android:drawable/ic_dialog_email"
         android:ems="10"
         android:fontFamily="@font/actor"
-        android:hint="E-Mail"
+        android:hint="@string/registerEmail"
         android:inputType="text|textEmailAddress"
         android:padding="10dp"
         android:paddingStart="5dp"
@@ -28,7 +28,7 @@
         android:textColor="?attr/plainTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/passwordFirstBoxRegister"
@@ -40,7 +40,7 @@
         android:drawableLeft="@android:drawable/ic_lock_idle_lock"
         android:ems="10"
         android:fontFamily="@font/actor"
-        android:hint="Password"
+        android:hint="@string/registerPWCreate"
         android:inputType="textPassword"
         android:padding="10dp"
         android:paddingStart="5dp"
@@ -54,21 +54,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailBoxRegister" />
 
+    <EditText
+        android:id="@+id/passwordSecondBoxRegister"
+        android:layout_width="0dp"
+        android:layout_height="55sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+        android:ems="10"
+        android:fontFamily="@font/actor"
+        android:hint="@string/registerPWConfirm"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="?attr/plainTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordFirstBoxRegister" />
+
     <ImageView
-        android:id="@+id/logoViewLogin"
+        android:id="@+id/logoViewRegister"
         android:layout_width="0dp"
         android:layout_height="124dp"
         android:layout_marginStart="150dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="150dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="125dp"
@@ -83,59 +108,57 @@
         android:textIsSelectable="false"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoViewLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/logoViewRegister" />
 
     <Button
-        android:id="@+id/toRegister"
+        android:id="@+id/registerExec"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="130dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="110dp"
+        android:contextClickable="true"
         android:fontFamily="sans-serif-smallcaps"
-        android:onClick="toRegister"
-        android:text="@string/toRegisterText"
-        android:textColor="?attr/buttonTextColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="100dp"
-        android:contextClickable="false"
-        android:fontFamily="@font/actor"
-        android:text="@string/toRegisterHint"
+        android:onClick="registerRun"
+        android:text="@string/registerExec"
         android:textAlignment="center"
-        android:textColor="?attr/plainTextColor"
+        android:textColor="?attr/buttonTextColor"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginExec" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordSecondBoxRegister" />
 
-    <Button
-        android:id="@+id/loginExec"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="125dp"
-        android:contextClickable="true"
-        android:fontFamily="sans-serif-smallcaps"
-        android:onClick="loginRun"
-        android:text="@string/loginExecText"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
+        android:contextClickable="false"
+        android:fontFamily="@font/actor"
+        android:text="@string/toLoginHint"
         android:textAlignment="center"
-        android:textColor="?attr/buttonTextColor"
-        android:textSize="24sp"
+        android:textColor="?attr/plainTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordFirstBoxRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/registerExec" />
 
+    <Button
+        android:id="@+id/toLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="110dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:onClick="toLogin"
+        android:text="@string/toLoginText"
+        android:textColor="?attr/buttonTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>
