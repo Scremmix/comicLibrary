@@ -16,37 +16,41 @@ class LoginActivity : AppCompatActivity() {
     }
     fun loginRun(view: View)
     {
+        Toast.makeText(this, loginProcedure(
+                findViewById<EditText>(R.id.emailBoxLogin).text.toString().toLowerCase(),
+                findViewById<EditText>(R.id.passwordLogin).text.toString()),
+            Toast.LENGTH_SHORT).show()
+    }
+
+    fun loginProcedure(email:String, password:String):String{
+
         val dbManager = DatabaseManager(this)
         try {
             dbManager.open()
         }catch (e: Exception)
         {}
-        val emailBoxLogin= findViewById<EditText>(R.id.emailBoxLogin).text.toString().toLowerCase()
-        val passwordBoxLogin= findViewById<EditText>(R.id.passwordLogin).text.toString()
         val cursor = dbManager.fetch()
         do{
             val qUtenteIndex = cursor.getColumnIndex(DatabaseHelper.MAIL_UTENTE)
             if(qUtenteIndex>-1) {
                 val q_utente = cursor.getString(qUtenteIndex)
-                if(q_utente.equals(emailBoxLogin))
+                if(q_utente.equals(email))
                 {
                     val qPasswordIndex = cursor.getColumnIndex(DatabaseHelper.PASSWORD_UTENTE)
                     if(qPasswordIndex>-1)
                     {
                         val q_password = cursor.getString(qPasswordIndex)
-                        if(q_password.equals(passwordBoxLogin)){
-                            Toast.makeText(this, "Login eseguito con successo", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this, "Password errata", Toast.LENGTH_SHORT).show()
+                        if(q_password.equals(password)){
+                            return getString(R.string.successLogin)
                         }
                     }
+                    else
+                        return getString(R.string.dbError)
                 }
-            }else{
-                Toast.makeText(this, "Errore nella query", Toast.LENGTH_SHORT).show()
             }
-        }while(!cursor.isAfterLast)
-
-        Toast.makeText(this, "Utente non trovato", Toast.LENGTH_SHORT).show()
+            cursor.moveToNext()
+        }while(cursor.position<(cursor.count-1))
+        return getString(R.string.failedLogin)
     }
 
     fun toRegister(view: View)

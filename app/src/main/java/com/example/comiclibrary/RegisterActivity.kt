@@ -19,29 +19,33 @@ class RegisterActivity : AppCompatActivity() {
         val emailBoxRegister= findViewById<EditText>(R.id.emailBoxRegister).text.toString().toLowerCase()
         val passwordFirstBoxRegister= findViewById<EditText>(R.id.passwordFirstBoxRegister).text.toString()
         val passwordSecondBoxRegister= findViewById<EditText>(R.id.passwordSecondBoxRegister).text.toString()
+        val registerResult = registerProcedure(emailBoxRegister,passwordFirstBoxRegister,passwordSecondBoxRegister)
+        Toast.makeText(this, registerResult, Toast.LENGTH_SHORT).show()
+        if(registerResult.equals(getString(R.string.successRegister))){
+            finish()
+        }
+    }
+
+    fun registerProcedure(email:String, pw1:String, pw2:String):String{
         val dbManager = DatabaseManager(this)
         try {
             dbManager.open()
-        }catch (e:Exception)
-        {}
+        }catch (_:Exception)
+        {return getString(R.string.dbError)}
 
-        if(passwordFirstBoxRegister.equals(passwordSecondBoxRegister))
+        if(pw1.equals(pw2))
         {
-            val success = dbManager.insert(emailBoxRegister, passwordFirstBoxRegister,false)
+            val success = dbManager.insert(email, pw1,false)
             var toastText = ""
             if(success)
-                toastText = "Registrazione effettuata con successo"
+                return getString(R.string.successRegister)
             else
-                toastText = "Errore con il db"
-            Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
-            finish()
+                return getString(R.string.dbError)
         }else
         {
-            Toast.makeText(this, "Le password non corrispondono", Toast.LENGTH_SHORT).show()
+            return getString(R.string.pwNotMatchingRegister)
         }
-
     }
-
     fun toLogin(view: View)
     {
         finish()

@@ -11,4 +11,9 @@
     <string name="loginEmail">E-mail</string>
     <string name="loginPW">Password</string>
     <string name="registerEmail">Enter e-mail</string>
+    <string name="successLogin">Logged in succesfully</string>
+    <string name="successRegister">Registered succesfully</string>
+    <string name="failedLogin">Credentials not matching</string>
+    <string name="pwNotMatchingRegister">Passwords do not match</string>
+    <string name="dbError">Error with the database</string>
 </resources>
