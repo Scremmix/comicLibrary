@@ -33,13 +33,13 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.MAIL_UTENTE,email);
         cv.put(DatabaseHelper.PASSWORD_UTENTE,password);
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
-        return(database.insert(DatabaseHelper.DATABASE_TABLE, null, cv)!=-1);
+        return(database.insert(DatabaseHelper.UTENTI_TABLE, null, cv)!=-1);
     }
     public Cursor fetch(){
         String []colonne= new String[]
                 {DatabaseHelper.MAIL_UTENTE, DatabaseHelper.PASSWORD_UTENTE, DatabaseHelper.TIPO_UTENTE};
         Cursor cursor= database.query
-                (DatabaseHelper.DATABASE_TABLE, colonne, null, null, null, null, null);
+                (DatabaseHelper.UTENTI_TABLE, colonne, null, null, null, null, null);
         if(cursor!=null)
         {
             cursor.moveToFirst();
@@ -52,12 +52,11 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.MAIL_UTENTE,email);
         cv.put(DatabaseHelper.PASSWORD_UTENTE,password);
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
-        int ret = database.update(DatabaseHelper.DATABASE_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "="+ email, null );
-        return ret;
+        return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "="+ email, null );
     }
     public boolean delete(String email)
     {
-        database.delete(DatabaseHelper.DATABASE_TABLE, DatabaseHelper.MAIL_UTENTE+ "="+ email, null);
+        database.delete(DatabaseHelper.UTENTI_TABLE, DatabaseHelper.MAIL_UTENTE+ "="+ email, null);
         return true;
     }
 }

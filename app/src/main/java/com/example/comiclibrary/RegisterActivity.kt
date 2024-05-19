@@ -36,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
         if(pw1.equals(pw2))
         {
             val success = dbManager.insert(email, pw1,false)
-            var toastText = ""
             if(success)
                 return getString(R.string.successRegister)
             else
