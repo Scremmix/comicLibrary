@@ -36,7 +36,7 @@ public class DatabaseManager {
         return(database.insert(DatabaseHelper.UTENTI_TABLE, null, cv)!=-1);
     }
     public Cursor fetch(){
-        String []colonne= new String[]
+        String [] colonne= new String[]
                 {DatabaseHelper.MAIL_UTENTE, DatabaseHelper.PASSWORD_UTENTE, DatabaseHelper.TIPO_UTENTE};
         Cursor cursor= database.query
                 (DatabaseHelper.UTENTI_TABLE, colonne, null, null, null, null, null);
