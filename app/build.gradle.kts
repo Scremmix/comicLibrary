@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.comiclibrary"
     compileSdk = 34
 
@@ -40,6 +41,9 @@ android {
         viewBinding = true
         compose = true
     }
+    buildFeatures{
+        viewBinding = true
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.10"
     }
@@ -48,7 +52,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
+
 
 dependencies {
 
