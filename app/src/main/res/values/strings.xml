@@ -16,4 +16,7 @@
     <string name="failedLogin">Credentials not matching</string>
     <string name="pwNotMatchingRegister">Passwords do not match</string>
     <string name="dbError">Error with the database</string>
+    <string name="menuHomeLabel">Home</string>
+    <string name="menuSearchLabel">Search</string>
+    <string name="menuProfileLabel">Profile</string>
 </resources>

@@ -11,10 +11,16 @@
         android:id="@+id/menu_nav_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:backgroundTintMode="add"
+        app:itemIconTint="?attr/buttonTextColor"
+        app:itemRippleColor="?attr/colorAccent"
+        app:itemTextAppearanceActive="--"
+        app:itemTextColor="?attr/buttonTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
 
     <FrameLayout
         android:id="@+id/homePage_fragment_container"
