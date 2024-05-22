@@ -35,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
 
         if(pw1.equals(pw2))
         {
-            val success = dbManager.insert(email, pw1,false)
+            val success = dbManager.insertNewUser(email, pw1,false)
             if(success)
                 return getString(R.string.successRegister)
             else

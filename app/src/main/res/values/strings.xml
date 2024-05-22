@@ -19,4 +19,5 @@
     <string name="menuHomeLabel">Home</string>
     <string name="menuSearchLabel">Search</string>
     <string name="menuProfileLabel">Profile</string>
+    <string name="credentialsNotFoundLogin">Credentials not found</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.comiclibrary
 
 import android.content.Intent
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     fun loginRun(view: View)
     {
         val esito_login= loginProcedure(
-            findViewById<EditText>(R.id.emailBoxLogin).text.toString().toLowerCase(),
+            findViewById<EditText>(R.id.emailBoxLogin).text.toString().lowercase(),
             findViewById<EditText>(R.id.passwordLogin).text.toString())
         Toast.makeText(this, esito_login,
             Toast.LENGTH_SHORT).show()
@@ -36,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             dbManager.open()
         }catch (e: Exception)
         {}
-        val cursor = dbManager.fetch()
+        val cursor = dbManager.getAllUsers()
         do{
             val qUtenteIndex = cursor.getColumnIndex(DatabaseHelper.MAIL_UTENTE)
             if(qUtenteIndex>-1) {
@@ -52,11 +51,11 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     else
-                        return getString(R.string.dbError)
+                        return getString(R.string.credentialsNotFoundLogin)
                 }
             }
             cursor.moveToNext()
-        }while(cursor.position<(cursor.count-1))
+        }while(cursor.position<(cursor.count))
         return getString(R.string.failedLogin)
     }
 
