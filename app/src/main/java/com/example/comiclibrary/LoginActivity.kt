@@ -15,14 +15,16 @@ class LoginActivity : AppCompatActivity() {
     }
     fun loginRun(view: View)
     {
-        val esito_login= loginProcedure(
-            findViewById<EditText>(R.id.emailBoxLogin).text.toString().lowercase(),
+        var userEmail = findViewById<EditText>(R.id.emailBoxLogin).text.toString().lowercase()
+        val esito_login= loginProcedure(userEmail,
             findViewById<EditText>(R.id.passwordLogin).text.toString())
         Toast.makeText(this, esito_login,
             Toast.LENGTH_SHORT).show()
         if(esito_login.equals(getString(R.string.successLogin)))
         {
-            startActivity(Intent(this,HomePageActivity::class.java))
+            val intent=Intent(this,HomePageActivity::class.java)
+            intent.putExtra("userEmail", userEmail)
+            startActivity(intent)
             finish()
         }
 

@@ -4,7 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.SQLDataException;
 
 public class DatabaseManager {
@@ -68,5 +71,42 @@ public class DatabaseManager {
     {
         database.delete(DatabaseHelper.UTENTI_TABLE, DatabaseHelper.MAIL_UTENTE+ "="+ email, null);
         return true;
+    }
+    public boolean userIsAdmin(String email)
+    {
+        String [] colonne= new String[]{DatabaseHelper.TIPO_UTENTE};
+        Cursor cursor = database.rawQuery("SELECT "+DatabaseHelper.TIPO_UTENTE+" FROM "+
+                DatabaseHelper.UTENTI_TABLE+" WHERE " +DatabaseHelper.MAIL_UTENTE +" = '" +email+"'",null);
+        cursor.moveToFirst();
+        int qPermessiUtente = cursor.getColumnIndex(DatabaseHelper.TIPO_UTENTE);
+        if(qPermessiUtente>-1){
+            return cursor.getInt(qPermessiUtente)>0;
+        }
+        else return false;
+    }
+
+    public boolean insertNewFumetto(String titolo, String descrizione, Bitmap copertina, int idSerie)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
+        cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
+        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
+        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
+        return(database.insert(DatabaseHelper.FUMETTI_TABLE, null, cv)!=-1);
+    }
+    public int updateFumetto(int id, String titolo, String descrizione, Bitmap copertina, int idSerie)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
+        cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
+        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
+        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
+        return database.update(DatabaseHelper.FUMETTI_TABLE, cv, DatabaseHelper.ID_FUMETTO + "="+ id, null );
+    }
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
     }
 }

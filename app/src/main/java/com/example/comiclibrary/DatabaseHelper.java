@@ -30,10 +30,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String ID_FUMETTO="id";
     static final String TITOLO_FUMETTO="titolo";
     static final String DESCRIZIONE_FUMETTO="descrizione";
+    static final String IMMAGINE_COPERTINA="copertinaimg";
     static final String IDS_FUMETTO="idSerie";
     private static final String CREATE_FUMETTI_TABLE_QUERY =
             "CREATE TABLE "+FUMETTI_TABLE+"( "+ID_FUMETTO+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TITOLO_FUMETTO+" VARCHAR(50) NOT NULL, "
-                    +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+IDS_FUMETTO+" INTEGER, FOREIGN KEY ("+IDS_FUMETTO+") REFERENCES "+SERIE_TABLE+"("+ID_SERIE+"));";
+                    +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+ IMMAGINE_COPERTINA+ " BLOB, " +IDS_FUMETTO+" INTEGER, " +
+                    "FOREIGN KEY ("+IDS_FUMETTO+") REFERENCES "+SERIE_TABLE+"("+ID_SERIE+"));";
 
 
     static final String PRESTITI_TABLE="PRESTITI";
