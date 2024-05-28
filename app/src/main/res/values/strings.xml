@@ -20,4 +20,5 @@
     <string name="menuSearchLabel">Search</string>
     <string name="menuProfileLabel">Profile</string>
     <string name="credentialsNotFoundLogin">Credentials not found</string>
+    <string name="admin_code" translatable="false">8520</string>
 </resources>

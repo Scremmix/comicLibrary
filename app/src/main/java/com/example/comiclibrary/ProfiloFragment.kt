@@ -40,10 +40,6 @@ class ProfiloFragment() : Fragment() {
         view.findViewById<TextView>(R.id.email_profilo_layout).text=userID
         view.findViewById<TextInputEditText>(R.id.password_profilo_layout).setText(pw)
         view.findViewById<TextView>(R.id.amministratore_profilo_layout).text=userProp.toString()
-
-       /* val textViewTest: TextView = view.findViewById(R.id.textViewUserTest)
-        textViewTest.text = "Benvenuto utente "+userID+" userAdmin= "+userProp.toString()+
-                             "la tua password è: "+userPassword*/
         return view
     }
 }
