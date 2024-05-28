@@ -19,11 +19,9 @@ class ProfiloFragment() : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-    fun onLogout(view: View){
-    (activity as HomePageActivity?)!!.onLogout(view)
+    fun logoutRun(view: View){
+        (activity as HomePageActivity?)!!.onLogout(view)
     }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +38,9 @@ class ProfiloFragment() : Fragment() {
         view.findViewById<TextView>(R.id.email_profilo_layout).text=userID
         view.findViewById<TextInputEditText>(R.id.password_profilo_layout).setText(pw)
         view.findViewById<TextView>(R.id.amministratore_profilo_layout).text=userProp.toString()
+        view.findViewById<TextView>(R.id.bottone_logout).setOnClickListener{
+            logoutRun(view)
+        }
         return view
     }
 }

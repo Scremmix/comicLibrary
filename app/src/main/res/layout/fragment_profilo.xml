@@ -96,7 +96,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:inputType="textPassword"
-                        android:textSize="14sp"></com.google.android.material.textfield.TextInputEditText>
+                        android:textSize="14sp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -130,7 +130,7 @@
                     android:layout_marginTop="100dp"
                     android:layout_marginEnd="100dp"
                     android:fontFamily="@font/actor"
-                    android:onClick="onLogout"
+                    android:onClick="logoutRun"
                     android:text="LOGOUT"
                     android:textSize="24sp"
                     android:textStyle="bold"

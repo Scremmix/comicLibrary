@@ -11,7 +11,7 @@ import com.example.comiclibrary.databinding.ActivityHomePageBinding
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     private lateinit var userID: String
-    public fun onLogout(view: View){
+    fun onLogout(view: View){
         startActivity(Intent(this,LoginActivity::class.java))
         finish()
     }
