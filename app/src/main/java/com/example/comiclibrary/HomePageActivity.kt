@@ -1,6 +1,8 @@
 package com.example.comiclibrary
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.comiclibrary.databinding.ActivityHomePageBinding
@@ -9,6 +11,10 @@ import com.example.comiclibrary.databinding.ActivityHomePageBinding
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     private lateinit var userID: String
+    public fun onLogout(view: View){
+        startActivity(Intent(this,LoginActivity::class.java))
+        finish()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val extras = intent.extras

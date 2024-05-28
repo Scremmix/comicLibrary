@@ -1,14 +1,12 @@
 package com.example.comiclibrary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import java.lang.Exception
+import com.google.android.material.textfield.TextInputEditText
 
 /**
  * A simple [Fragment] subclass.
@@ -17,8 +15,12 @@ import java.lang.Exception
  */
 class ProfiloFragment() : Fragment() {
     private lateinit var userID: String
+    private lateinit var pw:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+    fun onLogout(view: View){
+    (activity as HomePageActivity?)!!.onLogout(view)
     }
 
 
@@ -34,8 +36,14 @@ class ProfiloFragment() : Fragment() {
         }catch (_: Exception)
         {}
         val userProp = dbManager.userIsAdmin(userID)
-        val textViewTest: TextView = view.findViewById(R.id.textViewUserTest)
-        textViewTest.text = "Benvenuto utente "+userID+" userAdmin= "+userProp.toString()
+        pw=dbManager.getUser_password(userID)
+        view.findViewById<TextView>(R.id.email_profilo_layout).text=userID
+        view.findViewById<TextInputEditText>(R.id.password_profilo_layout).setText(pw)
+        view.findViewById<TextView>(R.id.amministratore_profilo_layout).text=userProp.toString()
+
+       /* val textViewTest: TextView = view.findViewById(R.id.textViewUserTest)
+        textViewTest.text = "Benvenuto utente "+userID+" userAdmin= "+userProp.toString()+
+                             "la tua password è: "+userPassword*/
         return view
     }
 }

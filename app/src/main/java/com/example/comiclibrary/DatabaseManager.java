@@ -84,7 +84,21 @@ public class DatabaseManager {
         }
         else return false;
     }
+    public String getUser_password(String email)
+    {
+        String [] colonne= new String[]{DatabaseHelper.TIPO_UTENTE};
+        Cursor cursor = database.rawQuery("SELECT "+DatabaseHelper.PASSWORD_UTENTE+" FROM "+
+                DatabaseHelper.UTENTI_TABLE+" WHERE " +DatabaseHelper.MAIL_UTENTE +" = '" +email+"'",null);
+        cursor.moveToFirst();
+        int qPermessiUtente = cursor.getColumnIndex(DatabaseHelper.PASSWORD_UTENTE);
+        if(qPermessiUtente>-1){
+            return cursor.getString(qPermessiUtente);
+        }
+        else {
+            return "";
+        }
 
+    }
     public boolean insertNewFumetto(String titolo, String descrizione, Bitmap copertina, int idSerie)
     {
         ContentValues cv = new ContentValues();
