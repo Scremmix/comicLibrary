@@ -21,4 +21,8 @@
     <string name="menuProfileLabel">Profile</string>
     <string name="credentialsNotFoundLogin">Credentials not found</string>
     <string name="admin_code" translatable="false">8520</string>
+    <string name="emailPatternMismatch">Email pattern incorrect</string>
+    <string name="adminPopupHint">Insert admin code</string>
+    <string name="adminPopupConfirm">Confirm</string>
+    <string name="registerAdminCheck">Request an administrator account</string>
 </resources>
