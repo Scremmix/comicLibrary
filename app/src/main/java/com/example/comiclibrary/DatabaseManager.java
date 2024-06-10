@@ -121,4 +121,18 @@ public class DatabaseManager {
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
+    public Cursor ricercaFumetto(String parametro)
+    {
+        Cursor cursor= database.rawQuery("SELECT "+DatabaseHelper.IMMAGINE_COPERTINA+", "+
+                        DatabaseHelper.TITOLO_FUMETTO +", "+
+                        DatabaseHelper.TITOLO_SERIE+ ", "+
+                        DatabaseHelper.DISPONIBILITA_FUMETTO+
+                        " FROM "+ DatabaseHelper.FUMETTI_TABLE+ " JOIN "+
+                        DatabaseHelper.SERIE_TABLE+ " ON "+ DatabaseHelper.IDS_FUMETTO+ " = "+
+                        DatabaseHelper.ID_SERIE+
+                        " WHERE "+ DatabaseHelper.TITOLO_FUMETTO+ " LIKE '%" +parametro +"%'",
+                null);
+        cursor.moveToFirst();
+        return cursor;
+    }
 }
