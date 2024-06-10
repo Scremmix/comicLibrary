@@ -17,25 +17,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE "+UTENTI_TABLE+"("+MAIL_UTENTE+" VARCHAR(40) PRIMARY KEY NOT NULL, "+ PASSWORD_UTENTE+ " VARCHAR(30) NOT NULL, "
                     + TIPO_UTENTE+ " BOOLEAN NOT NULL DEFAULT 0);" ;
 
-
-    static final String SERIE_TABLE="SERIE";
-    static final String ID_SERIE="id";
-    static final String TITOLO_SERIE="titolo";
-    static final String DESCRIZIONE_SERIE="descrizione";
-    private static final String CREATE_SERIE_TABLE_QUERY =
-            "CREATE TABLE "+SERIE_TABLE+"( "+ID_SERIE+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TITOLO_SERIE+" VARCHAR(50) NOT NULL, "
-                    +DESCRIZIONE_SERIE+" VARCHAR(500));";
-
     static final String FUMETTI_TABLE="FUMETTI";
     static final String ID_FUMETTO="id";
     static final String TITOLO_FUMETTO="titolo";
     static final String DESCRIZIONE_FUMETTO="descrizione";
     static final String IMMAGINE_COPERTINA="copertinaimg";
-    static final String IDS_FUMETTO="idSerie";
     private static final String CREATE_FUMETTI_TABLE_QUERY =
             "CREATE TABLE "+FUMETTI_TABLE+"( "+ID_FUMETTO+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TITOLO_FUMETTO+" VARCHAR(50) NOT NULL, "
-                    +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+ IMMAGINE_COPERTINA+ " BLOB, " +IDS_FUMETTO+" INTEGER, " +
-                    "FOREIGN KEY ("+IDS_FUMETTO+") REFERENCES "+SERIE_TABLE+"("+ID_SERIE+"));";
+                    +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+ IMMAGINE_COPERTINA+ " BLOB );";
 
 
     static final String PRESTITI_TABLE="PRESTITI";
@@ -57,7 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_UTENTI_TABLE_QUERY);
-        db.execSQL(CREATE_SERIE_TABLE_QUERY);
         db.execSQL(CREATE_FUMETTI_TABLE_QUERY);
         db.execSQL(CREATE_PRESTITI_TABLE_QUERY);
     }
@@ -66,7 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ UTENTI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ FUMETTI_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS "+ SERIE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ PRESTITI_TABLE);
     }
 }

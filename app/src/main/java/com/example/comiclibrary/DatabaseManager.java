@@ -105,7 +105,6 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
         cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
-        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
         return(database.insert(DatabaseHelper.FUMETTI_TABLE, null, cv)!=-1);
     }
     public int updateFumetto(int id, String titolo, String descrizione, Bitmap copertina, int idSerie)
@@ -114,7 +113,6 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
         cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
-        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
         return database.update(DatabaseHelper.FUMETTI_TABLE, cv, DatabaseHelper.ID_FUMETTO + "="+ id, null );
     }
 
