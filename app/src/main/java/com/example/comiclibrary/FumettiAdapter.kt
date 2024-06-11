@@ -1,65 +1,65 @@
-package com.example.comiclibrary;
+package com.example.comiclibrary
 
-import android.content.Context;
-import android.database.Cursor;
-import android.view.LayoutInflater;
-import android.view.TextureView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.graphics.BitmapFactory
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
+class FumettiAdapter(private val dataSet: List<RecordFumetto>) :
+    RecyclerView.Adapter<FumettiAdapter.ViewHolder>() {
 
-import com.google.android.material.imageview.ShapeableImageView;
+    /**
+     * Provide a reference to the type of views that you are using
+     * (custom ViewHolder)
+     */
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var copertina: ImageView = view.findViewById(R.id.copertina_fumetto)
+        var titolo: TextView = view.findViewById(R.id.titolo_fumetto)
+        var serie: TextView= view.findViewById(R.id.serie_fumetto)
+        var disponibilita: TextView = view.findViewById(R.id.disponibilita)
 
-import org.w3c.dom.Text;
-
-public class FumettiAdapter extends RecyclerView.Adapter<FumettiAdapter.FumettiHolder>  {
-    private Context context;
-    private  Cursor contenuto;
-    public FumettiAdapter(Context context, Cursor contenuto){
-        this.context=context;
-        this.contenuto=contenuto;
-     }
-
-    @NonNull
-    @Override
-    public FumettiHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(context).inflate(R.layout.lista_fumetti, parent, false);
-        return new FumettiHolder(v);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull FumettiHolder holder, int position) {
-        if(contenuto != null)
-        {
-            holder.copertina.setImageResource(R.drawable.icon);
-            holder.titolo.setText("dwkefdpoewwok");
-            holder.serie.setText("alallala");
-            holder.disponibilita.setText("no");
+        init {
+            // Define click listener for the ViewHolder's View
         }
     }
 
-    @Override
-    public int getItemCount() {
-        if(contenuto != null)
-        {
-            return contenuto.getCount();
-        }else
-            return 0;
+    // Create new views (invoked by the layout manager)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        // Create a new view, which defines the UI of the list item
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.lista_fumetti, viewGroup, false)
 
+        return ViewHolder(view)
     }
 
-    public class FumettiHolder extends RecyclerView.ViewHolder {
-        private ShapeableImageView copertina;
-        private TextView titolo, serie, disponibilita;
+    // Replace the contents of a view (invoked by the layout manager)
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        public FumettiHolder(@NonNull View itemView) {
-            super(itemView);
+        // Get element from your dataset at this position and replace the
+        // contents of the view with that element
+        val copertina = dataSet[position].copertina
+        if(copertina!= null)
+        {
+            val bitmap = BitmapFactory.decodeByteArray(copertina, 0, copertina.size)
+            viewHolder.copertina.setImageBitmap(bitmap)
+        }else{
+            viewHolder.copertina.setImageResource(R.drawable.icon)
         }
 
-
+        viewHolder.titolo.text=dataSet[position].titolo
+        viewHolder.serie.text=dataSet[position].serie
+        val disponibilitaText = when(dataSet[position].disponibilita){
+            0 -> viewHolder.itemView.context.getString(R.string.fumettoAvailableText)
+            2 -> viewHolder.itemView.context.getString(R.string.fumettoNotAvailableText)
+            else -> viewHolder.itemView.context.getString(R.string.fumettoBookedText)
+        }
+        viewHolder.disponibilita.text=disponibilitaText
     }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    override fun getItemCount() = dataSet.size
+
 }

@@ -33,10 +33,7 @@ class LoginActivity : AppCompatActivity() {
     fun loginProcedure(email:String, password:String):String{
 
         val dbManager = DatabaseManager(this)
-        try {
-            dbManager.open()
-        }catch (e: Exception)
-        {}
+        dbManager.open()
         val cursor = dbManager.getAllUsers()
         do{
             val qUtenteIndex = cursor.getColumnIndex(DatabaseHelper.MAIL_UTENTE)
@@ -56,8 +53,7 @@ class LoginActivity : AppCompatActivity() {
                         return getString(R.string.credentialsNotFoundLogin)
                 }
             }
-            cursor.moveToNext()
-        }while(cursor.position<(cursor.count))
+        }while(cursor.moveToNext())
         return getString(R.string.failedLogin)
     }
 

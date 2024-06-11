@@ -3,12 +3,13 @@ package com.example.comiclibrary;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME="Database_fumetti";
-    static final int DATABASE_VERSION=1;
+    static final int DATABASE_VERSION=3;
     static final String UTENTI_TABLE="UTENTI";
     static final String MAIL_UTENTE="mail";
     static final String PASSWORD_UTENTE="password";
@@ -39,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+ IMMAGINE_COPERTINA+ " BLOB, " +IDS_FUMETTO+" INTEGER, " +
                     DISPONIBILITA_FUMETTO+ " INTEGER , "+
                     "FOREIGN KEY ("+IDS_FUMETTO+") REFERENCES "+SERIE_TABLE+"("+ID_SERIE+"));";
+
+
     static final String PRESTITI_TABLE="PRESTITI";
     static final String IDU_PRESTITI="idUtente";
     static final String IDF_PRESTITI="idFumetto";
@@ -61,8 +64,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_UTENTI_TABLE_QUERY);
-        db.execSQL(CREATE_FUMETTI_TABLE_QUERY);
         db.execSQL(CREATE_SERIE_TABLE_QUERY);
+        db.execSQL(CREATE_FUMETTI_TABLE_QUERY);
         db.execSQL(CREATE_PRESTITI_TABLE_QUERY);
         db.execSQL("INSERT INTO "+SERIE_TABLE+ " ("+ TITOLO_SERIE+", "+ DESCRIZIONE_SERIE+ ")" +
                 " VALUES('Bluelock', 'Serie manga sul calcio come non lo avete mai visto, la ricerca del fenomeno che porterà il giappone alla vittoria del mondiale')");
@@ -90,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
                 " VALUES('Batman 96', 'fumetto DC comics', NULL, 2, 1 )");
         db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
-                " VALUES('admin@gmail.com', 'admin123', true)");
+                " VALUES('admin@lifumetti.outlook.com', 'admin123', true)");
         db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
                 " VALUES('normaluser@gmail.com', 'example', false)");
     }
@@ -101,5 +104,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ FUMETTI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ SERIE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ PRESTITI_TABLE);
+        onCreate(db);
     }
 }

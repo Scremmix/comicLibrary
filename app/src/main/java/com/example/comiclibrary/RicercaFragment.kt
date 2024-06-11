@@ -2,6 +2,7 @@ package com.example.comiclibrary
 
 import android.database.Cursor
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,29 +36,45 @@ class RicercaFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_ricerca, container, false)
         val ricercaBox=view.findViewById<SearchView>(R.id.barra_ricerca)
         val db_manager= DatabaseManager(this.context)
+        db_manager.open()
         ricercaBox.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
                 if (!newText.equals(""))
                 {
                     val risultato= db_manager.ricercaFumetto(newText)
                     MostraFumetti(risultato, view)
+                    risultato.close()
                 }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
+                if (!query.equals(""))
+                {
+                    val risultato= db_manager.ricercaFumetto(query)
+                    MostraFumetti(risultato, view)
+                    risultato.close()
+                }
                 return true
             }
 
         })
-        return inflater.inflate(R.layout.fragment_ricerca, container, false)
-
+        return view
     }
     fun MostraFumetti(fumetti: Cursor, view: View) {
         val recyclerView= view.findViewById<RecyclerView>(R.id.recycler_ricerca)
         recyclerView.layoutManager= LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
-        val adapter= FumettiAdapter(context,fumetti)
+        val fumettiList= mutableListOf<RecordFumetto>()
+        do{
+            Log.e("LiFumetti","MostraFumetti: traduzione dati in corso")
+            val copertina = if(fumetti.isNull(0)) null else fumetti.getBlob(0)
+            fumettiList.add(RecordFumetto(copertina,
+                    fumetti.getString(1),
+                    fumetti.getString(2),
+                    fumetti.getInt(3)))
+        }while(fumetti.moveToNext())
+        val adapter= FumettiAdapter(fumettiList)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()
     }
@@ -66,7 +83,8 @@ class RicercaFragment : Fragment() {
         val recyclerView= view.findViewById<RecyclerView>(R.id.recycler_ricerca)
         recyclerView.layoutManager= LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
-        val adapter= FumettiAdapter(context, null)
+        val fumettiList= mutableListOf<RecordFumetto>()
+        val adapter= FumettiAdapter(fumettiList)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()
     }

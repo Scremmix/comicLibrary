@@ -35,19 +35,6 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
         return(database.insert(DatabaseHelper.UTENTI_TABLE, null, cv)!=-1);
     }
-    public Cursor searchUser(String email)
-    {
-        String [] colonne= new String[]
-            {DatabaseHelper.MAIL_UTENTE, DatabaseHelper.PASSWORD_UTENTE, DatabaseHelper.TIPO_UTENTE};
-        Cursor cursor= database.query
-                (DatabaseHelper.UTENTI_TABLE, colonne, DatabaseHelper.MAIL_UTENTE + " LIKE " + email,
-                        null, null, null, null);
-        if(cursor!=null)
-        {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
     public Cursor getAllUsers(){
         String [] colonne= new String[]
                 {DatabaseHelper.MAIL_UTENTE, DatabaseHelper.PASSWORD_UTENTE, DatabaseHelper.TIPO_UTENTE};
@@ -104,7 +91,7 @@ public class DatabaseManager {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
-        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
+        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,fromBitmapToByte(copertina));
         return(database.insert(DatabaseHelper.FUMETTI_TABLE, null, cv)!=-1);
     }
     public int updateFumetto(int id, String titolo, String descrizione, Bitmap copertina, int idSerie)
@@ -112,25 +99,25 @@ public class DatabaseManager {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
-        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,getBitmapAsByteArray(copertina));
+        cv.put(DatabaseHelper.IMMAGINE_COPERTINA,fromBitmapToByte(copertina));
         return database.update(DatabaseHelper.FUMETTI_TABLE, cv, DatabaseHelper.ID_FUMETTO + "="+ id, null );
     }
 
-    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+    public static byte[] fromBitmapToByte(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
     public Cursor ricercaFumetto(String parametro)
     {
-        Cursor cursor= database.rawQuery("SELECT "+DatabaseHelper.IMMAGINE_COPERTINA+", "+
-                        DatabaseHelper.TITOLO_FUMETTO +", "+
-                        DatabaseHelper.TITOLO_SERIE+ ", "+
+        Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+
+                        DatabaseHelper.TITOLO_FUMETTO +", S."+
+                        DatabaseHelper.TITOLO_SERIE+ ", F."+
                         DatabaseHelper.DISPONIBILITA_FUMETTO+
-                        " FROM "+ DatabaseHelper.FUMETTI_TABLE+ " JOIN "+
-                        DatabaseHelper.SERIE_TABLE+ " ON "+ DatabaseHelper.IDS_FUMETTO+ " = "+
+                        " FROM "+ DatabaseHelper.FUMETTI_TABLE+ " F JOIN "+
+                        DatabaseHelper.SERIE_TABLE+ " S ON F."+ DatabaseHelper.IDS_FUMETTO+ " = S."+
                         DatabaseHelper.ID_SERIE+
-                        " WHERE "+ DatabaseHelper.TITOLO_FUMETTO+ " LIKE '%" +parametro +"%'",
+                        " WHERE F."+ DatabaseHelper.TITOLO_FUMETTO+ " LIKE '%" +parametro +"%'",
                 null);
         cursor.moveToFirst();
         return cursor;

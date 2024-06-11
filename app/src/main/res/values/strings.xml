@@ -29,4 +29,7 @@
     <string name="admin_no_profilo">No</string>
     <string name="user_information_label">User informations</string>
     <string name="administrator_profile">Administrator</string>
+    <string name="fumettoAvailableText">Available</string>
+    <string name="fumettoNotAvailableText">Not available</string>
+    <string name="fumettoBookedText">Booked</string>
 </resources>

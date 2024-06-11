@@ -28,4 +28,7 @@
     <string name="admin_no_profilo">No</string>
     <string name="user_information_label">Informazioni utente</string>
     <string name="administrator_profile">Amministratore</string>
+    <string name="fumettoAvailableText">Disponibile</string>
+    <string name="fumettoNotAvailableText">Non disponibile</string>
+    <string name="fumettoBookedText">Prenotato</string>
 </resources>
