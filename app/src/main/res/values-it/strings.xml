@@ -24,4 +24,8 @@
     <string name="adminPopupHint">Inserisci il codice amministratore</string>
     <string name="adminPopupConfirm">Conferma</string>
     <string name="registerAdminCheck">Richiedi permessi di amministratore</string>
+    <string name="admin_yes_profilo">Sì</string>
+    <string name="admin_no_profilo">No</string>
+    <string name="user_information_label">Informazioni utente</string>
+    <string name="administrator_profile">Amministratore</string>
 </resources>

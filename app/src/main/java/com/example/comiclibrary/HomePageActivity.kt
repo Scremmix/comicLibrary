@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import com.example.comiclibrary.databinding.ActivityHomePageBinding
 
 
+
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     private lateinit var userID: String
+   // private  var userAdmin:Boolean=false
     fun onLogout(view: View){
         startActivity(Intent(this,LoginActivity::class.java))
         finish()
@@ -18,14 +20,23 @@ class HomePageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val extras = intent.extras
+        //val dbManager=DatabaseManager(this)
         userID = extras?.getString("userEmail").toString()
+        //userAdmin=dbManager.userIsAdmin(userID)
         binding=ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         cambiaFragment(HomeFragment())
         binding.menuNavBar.setOnItemSelectedListener {
             var fragment = when(it.itemId)
             {
-                R.id.home_nav_bar-> HomeFragment()
+                R.id.home_nav_bar-> /*{
+                    if (userAdmin)
+                    {
+                        HomeFragmentAdmin()
+                    }else{*/
+                        HomeFragment()
+                    //}
+                //}
                 R.id.search_nav_bar-> RicercaFragment()
                 R.id.profile_nav_bar-> ProfiloFragment()
                 else -> {HomeFragment()}

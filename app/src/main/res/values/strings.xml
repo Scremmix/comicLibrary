@@ -25,4 +25,8 @@
     <string name="adminPopupHint">Insert admin code</string>
     <string name="adminPopupConfirm">Confirm</string>
     <string name="registerAdminCheck">Request an administrator account</string>
+    <string name="admin_yes_profilo">Yes</string>
+    <string name="admin_no_profilo">No</string>
+    <string name="user_information_label">User informations</string>
+    <string name="administrator_profile">Administrator</string>
 </resources>

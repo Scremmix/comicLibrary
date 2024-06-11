@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/actor"
-                    android:text="Informazioni utente"
+                    android:text="@string/user_information_label"
                     android:textSize="28sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="50dp"
                     android:fontFamily="@font/actor"
-                    android:text="Amministratore:"
+                    android:text="@string/administrator_profile"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView10" />

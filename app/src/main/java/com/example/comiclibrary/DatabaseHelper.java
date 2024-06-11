@@ -31,12 +31,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DESCRIZIONE_FUMETTO="descrizione";
     static final String IMMAGINE_COPERTINA="copertinaimg";
     static final String IDS_FUMETTO="idSerie";
-    static final String DISPONIBILITA_FUMETTO="disponibilita";
+    static final String DISPONIBILITA_FUMETTO="disponibilita"; /* 0= disponibile
+                                                                  1= non disponibile
+                                                                  2= pernotato*/
     private static final String CREATE_FUMETTI_TABLE_QUERY =
             "CREATE TABLE "+FUMETTI_TABLE+"( "+ID_FUMETTO+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TITOLO_FUMETTO+" VARCHAR(50) NOT NULL, "
                     +DESCRIZIONE_FUMETTO+" VARCHAR(500), "+ IMMAGINE_COPERTINA+ " BLOB, " +IDS_FUMETTO+" INTEGER, " +
-                    DISPONIBILITA_FUMETTO+ " VARCHAR(20), "+
+                    DISPONIBILITA_FUMETTO+ " INTEGER , "+
                     "FOREIGN KEY ("+IDS_FUMETTO+") REFERENCES "+SERIE_TABLE+"("+ID_SERIE+"));";
+    static final String PRESTITI_TABLE="PRESTITI";
+    static final String IDU_PRESTITI="idUtente";
+    static final String IDF_PRESTITI="idFumetto";
+    static final String DATA_PRESTITO="dataPrestito";
+    static final String PRESTITO_CONCLUSO="concluso";
+    private static final String CREATE_PRESTITI_TABLE_QUERY =
+            "CREATE TABLE "+PRESTITI_TABLE+"("+IDU_PRESTITI+" VARCHAR(40) NOT NULL, "+ IDF_PRESTITI+ " INTEGER NOT NULL, "
+                    +DATA_PRESTITO+"TEXT NOT NULL, "+PRESTITO_CONCLUSO+"BOOLEAN DEFAULT 0," +
+                    "FOREIGN KEY ("+IDU_PRESTITI+") REFERENCES "+UTENTI_TABLE+"("+MAIL_UTENTE+")," +
+                    "FOREIGN KEY ("+IDF_PRESTITI+") REFERENCES "+FUMETTI_TABLE+"("+ID_FUMETTO+")," +
+                    "PRIMARY KEY ("+IDU_PRESTITI+","+IDF_PRESTITI+"));" ;
+
+
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,31 +63,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_UTENTI_TABLE_QUERY);
         db.execSQL(CREATE_FUMETTI_TABLE_QUERY);
         db.execSQL(CREATE_SERIE_TABLE_QUERY);
+        db.execSQL(CREATE_PRESTITI_TABLE_QUERY);
         db.execSQL("INSERT INTO "+SERIE_TABLE+ " ("+ TITOLO_SERIE+", "+ DESCRIZIONE_SERIE+ ")" +
                 " VALUES('Bluelock', 'Serie manga sul calcio come non lo avete mai visto, la ricerca del fenomeno che porterà il giappone alla vittoria del mondiale')");
         db.execSQL("INSERT INTO "+SERIE_TABLE+ " ("+ TITOLO_SERIE+", "+ DESCRIZIONE_SERIE+ ")" +
                 " VALUES('Batman', 'Il vigilante notturno più famoso di tutta Gotham city')");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Bluelock 1', 'manga sportivo', NULL, 1 )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Bluelock 1', 'manga sportivo', NULL, 1, 0 )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Bluelock 2', 'manga sportivo', NULL, 1  )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Bluelock 2', 'manga sportivo', NULL, 1, 2 )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Bluelock 3', 'manga sportivo', NULL, 1  )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Bluelock 3', 'manga sportivo', NULL, 1, 1  )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Bluelock 4', 'manga sportivo', NULL, 1  )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Bluelock 4', 'manga sportivo', NULL, 1, 2  )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Bluelock 5', 'manga sportivo', NULL, 1  )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Bluelock 5', 'manga sportivo', NULL, 1, 0  )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Batman 95', 'fumetto DC comics', NULL, 2  )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Batman 95', 'fumetto DC comics', NULL, 2, 0 )");
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
-                " "+  IDS_FUMETTO  +")" +
-                " VALUES('Batman 96', 'fumetto DC comics', NULL, 2 )");
+                " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
+                " VALUES('Batman 96', 'fumetto DC comics', NULL, 2, 1 )");
+        db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
+                " VALUES('admin@gmail.com', 'admin123', true)");
+        db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
+                " VALUES('normaluser@gmail.com', 'example', false)");
     }
 
     @Override
@@ -80,5 +100,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ UTENTI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ FUMETTI_TABLE);
         db.execSQL("DROP TABLE IF EXISTS "+ SERIE_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+ PRESTITI_TABLE);
     }
 }

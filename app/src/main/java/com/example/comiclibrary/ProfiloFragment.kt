@@ -26,18 +26,24 @@ class ProfiloFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_profilo, container, false)
+        val view = inflater.inflate(R.layout.fragment_profilo, container, false)
         userID = requireArguments().getString("userEmail").toString()
         val dbManager = DatabaseManager(this.context)
         try {
             dbManager.open()
-        }catch (_: Exception)
-        {}
+        } catch (_: Exception) {
+        }
         val userProp = dbManager.userIsAdmin(userID)
-        pw=dbManager.getUser_password(userID)
-        view.findViewById<TextView>(R.id.email_profilo_layout).text=userID
+        pw = dbManager.getUser_password(userID)
+        view.findViewById<TextView>(R.id.email_profilo_layout).text = userID
         view.findViewById<TextInputEditText>(R.id.password_profilo_layout).setText(pw)
-        view.findViewById<TextView>(R.id.amministratore_profilo_layout).text=userProp.toString()
+        val adminlabel = view.findViewById<TextView>(R.id.amministratore_profilo_layout)
+        if (userProp)
+        {
+            adminlabel.text= resources.getString(R.string.admin_yes_profilo)
+        }else{
+            adminlabel.text= resources.getString(R.string.admin_no_profilo)
+        }
         view.findViewById<TextView>(R.id.bottone_logout).setOnClickListener{
             logoutRun(view)
         }
