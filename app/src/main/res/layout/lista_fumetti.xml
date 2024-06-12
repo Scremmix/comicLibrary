@@ -3,12 +3,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/llMain"
+    android:id="@+id/lfumettiMain"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="2dp">
 
     <!--TextView for displaying Name -->
     <androidx.cardview.widget.CardView
@@ -27,18 +27,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="10dp">
 
             <!--TextView for displaying Name -->
 
             <ImageView
                 android:id="@+id/copertina_fumetto"
-                android:layout_width="90dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="75dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/titolo_fumetto"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/actor"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/buttonTextColor"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/serie_fumetto"
@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/actor"
+                android:textColor="?attr/buttonTextColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/copertina_fumetto"
                 app:layout_constraintStart_toStartOf="@+id/titolo_fumetto"

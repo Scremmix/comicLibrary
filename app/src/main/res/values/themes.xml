@@ -8,6 +8,9 @@
 
         <item name="plainTextColor">@color/black</item>
         <item name="buttonTextColor">@color/white</item>
+        <item name="availableColor">@color/darkGreen</item>
+        <item name="notAvailableColor">@color/darkAmber</item>
+        <item name="bookedColor">@color/darkRed</item>
     </style>
 
     <style name="Theme.ComicLibrary" parent="Base.Theme.ComicLibrary" />

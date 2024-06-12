@@ -1,12 +1,14 @@
 package com.example.comiclibrary
 
 import android.graphics.BitmapFactory
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 
 class FumettiAdapter(private val dataSet: List<RecordFumetto>) :
     RecyclerView.Adapter<FumettiAdapter.ViewHolder>() {
@@ -21,9 +23,6 @@ class FumettiAdapter(private val dataSet: List<RecordFumetto>) :
         var serie: TextView= view.findViewById(R.id.serie_fumetto)
         var disponibilita: TextView = view.findViewById(R.id.disponibilita)
 
-        init {
-            // Define click listener for the ViewHolder's View
-        }
     }
 
     // Create new views (invoked by the layout manager)
@@ -46,7 +45,7 @@ class FumettiAdapter(private val dataSet: List<RecordFumetto>) :
             val bitmap = BitmapFactory.decodeByteArray(copertina, 0, copertina.size)
             viewHolder.copertina.setImageBitmap(bitmap)
         }else{
-            viewHolder.copertina.setImageResource(R.drawable.icon)
+            viewHolder.copertina.setImageResource(R.drawable.nocovercomic)
         }
 
         viewHolder.titolo.text=dataSet[position].titolo
@@ -57,6 +56,15 @@ class FumettiAdapter(private val dataSet: List<RecordFumetto>) :
             else -> viewHolder.itemView.context.getString(R.string.fumettoBookedText)
         }
         viewHolder.disponibilita.text=disponibilitaText
+
+        val typedValue = TypedValue()
+        val theme = viewHolder.itemView.context.theme
+        theme.resolveAttribute(when(dataSet[position].disponibilita) {
+            0 -> R.attr.availableColor
+            2 -> R.attr.bookedColor
+            else -> R.attr.notAvailableColor
+        }, typedValue, true)
+        viewHolder.disponibilita.setTextColor(typedValue.data)
     }
 
     // Return the size of your dataset (invoked by the layout manager)

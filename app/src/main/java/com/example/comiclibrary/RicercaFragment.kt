@@ -11,11 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [RicercaFragment.newInstance] factory method to
@@ -42,7 +37,7 @@ class RicercaFragment : Fragment() {
                 if (!newText.equals(""))
                 {
                     val risultato= db_manager.ricercaFumetto(newText)
-                    MostraFumetti(risultato, view)
+                    mostraFumetti(risultato, view)
                     risultato.close()
                 }
                 return true
@@ -52,7 +47,7 @@ class RicercaFragment : Fragment() {
                 if (!query.equals(""))
                 {
                     val risultato= db_manager.ricercaFumetto(query)
-                    MostraFumetti(risultato, view)
+                    mostraFumetti(risultato, view)
                     risultato.close()
                 }
                 return true
@@ -61,13 +56,12 @@ class RicercaFragment : Fragment() {
         })
         return view
     }
-    fun MostraFumetti(fumetti: Cursor, view: View) {
+    fun mostraFumetti(fumetti: Cursor, view: View) {
         val recyclerView= view.findViewById<RecyclerView>(R.id.recycler_ricerca)
         recyclerView.layoutManager= LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         val fumettiList= mutableListOf<RecordFumetto>()
         do{
-            Log.e("LiFumetti","MostraFumetti: traduzione dati in corso")
             val copertina = if(fumetti.isNull(0)) null else fumetti.getBlob(0)
             fumettiList.add(RecordFumetto(copertina,
                     fumetti.getString(1),
@@ -80,7 +74,7 @@ class RicercaFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView= view.findViewById<RecyclerView>(R.id.recycler_ricerca)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_ricerca)
         recyclerView.layoutManager= LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         val fumettiList= mutableListOf<RecordFumetto>()

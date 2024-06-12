@@ -8,5 +8,8 @@
 
         <item name="plainTextColor">@color/white</item>
         <item name="buttonTextColor">@color/white</item>
+        <item name="availableColor">@color/lightGreen</item>
+        <item name="notAvailableColor">@color/lightAmber</item>
+        <item name="bookedColor">@color/lightRed</item>
     </style>
 </resources>

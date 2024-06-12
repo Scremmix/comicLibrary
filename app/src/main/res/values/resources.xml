@@ -2,4 +2,7 @@
 <resources>
     <attr name="plainTextColor" format="color"/>
     <attr name="buttonTextColor" format="color"/>
+    <attr name="availableColor" format="color"/>
+    <attr name="notAvailableColor" format="color"/>
+    <attr name="bookedColor" format="color"/>
 </resources>
