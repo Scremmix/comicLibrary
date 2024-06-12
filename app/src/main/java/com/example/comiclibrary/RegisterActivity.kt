@@ -15,7 +15,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
     }
-    public fun amministratoreTrigg(view: View, esito:Boolean)
+    fun amministratoreTrigg(view: View, esito:Boolean)
     {
         val emailBoxRegister= findViewById<EditText>(R.id.emailBoxRegister).text.toString().lowercase()
         val passwordFirstBoxRegister= findViewById<EditText>(R.id.passwordFirstBoxRegister).text.toString()

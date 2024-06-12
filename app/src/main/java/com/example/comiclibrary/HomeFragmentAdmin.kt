@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
  * Use the [HomeFragmentAdmin.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragmentAdmin : Fragment() {
-
+class HomeFragmentAdmin(var loggedUser:String) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -43,16 +41,18 @@ class HomeFragmentAdmin : Fragment() {
         val utentiList= mutableListOf<RecordUtente>()
         if(utenti.count>0) {
             do {
-                utentiList.add(
-                    RecordUtente(
-                        utenti.getString(0),
-                        utenti.getString(1),
-                        utenti.getInt(2) == 1
+                if(!utenti.getString(0).equals(loggedUser)) {
+                    utentiList.add(
+                        RecordUtente(
+                            utenti.getString(0),
+                            utenti.getString(1),
+                            utenti.getInt(2) == 1
+                        )
                     )
-                )
+                }
             } while (utenti.moveToNext())
         }
-        val adapter = UtentiAdapter(utentiList)
+        val adapter = UtentiAdapter(utentiList,this.requireContext(), requireActivity().supportFragmentManager)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()
     }

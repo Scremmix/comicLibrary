@@ -44,13 +44,13 @@ public class DatabaseManager {
         }
         return cursor;
     }
-    public int updateUser(String email, String password, boolean administrator )
+    public int updateUser(String emailOld, String emailNew, String password, boolean administrator )
     {
         ContentValues cv= new ContentValues();
-        cv.put(DatabaseHelper.MAIL_UTENTE,email);
+        cv.put(DatabaseHelper.MAIL_UTENTE,emailNew);
         cv.put(DatabaseHelper.PASSWORD_UTENTE,password);
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
-        return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "="+ email, null );
+        return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "='"+ emailOld+"'", null );
     }
     public boolean deleteUser(String email)
     {
@@ -59,7 +59,6 @@ public class DatabaseManager {
     }
     public boolean userIsAdmin(String email)
     {
-        String [] colonne= new String[]{DatabaseHelper.TIPO_UTENTE};
         Cursor cursor = database.rawQuery("SELECT "+DatabaseHelper.TIPO_UTENTE+" FROM "+
                 DatabaseHelper.UTENTI_TABLE+" WHERE " +DatabaseHelper.MAIL_UTENTE +" = '" +email+"'",null);
         cursor.moveToFirst();
@@ -71,7 +70,6 @@ public class DatabaseManager {
     }
     public String getUser_password(String email)
     {
-        String [] colonne= new String[]{DatabaseHelper.TIPO_UTENTE};
         Cursor cursor = database.rawQuery("SELECT "+DatabaseHelper.PASSWORD_UTENTE+" FROM "+
                 DatabaseHelper.UTENTI_TABLE+" WHERE " +DatabaseHelper.MAIL_UTENTE +" = '" +email+"'",null);
         cursor.moveToFirst();
@@ -82,7 +80,6 @@ public class DatabaseManager {
         else {
             return "";
         }
-
     }
     public boolean insertNewFumetto(String titolo, String descrizione, Bitmap copertina, int idSerie)
     {
@@ -90,6 +87,7 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
         cv.put(DatabaseHelper.IMMAGINE_COPERTINA,fromBitmapToByte(copertina));
+        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
         return(database.insert(DatabaseHelper.FUMETTI_TABLE, null, cv)!=-1);
     }
     public int updateFumetto(int id, String titolo, String descrizione, Bitmap copertina, int idSerie)
@@ -98,6 +96,7 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TITOLO_FUMETTO,titolo);
         cv.put(DatabaseHelper.DESCRIZIONE_FUMETTO,descrizione);
         cv.put(DatabaseHelper.IMMAGINE_COPERTINA,fromBitmapToByte(copertina));
+        cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
         return database.update(DatabaseHelper.FUMETTI_TABLE, cv, DatabaseHelper.ID_FUMETTO + "="+ id, null );
     }
 

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME="Database_fumetti";
     static final int DATABASE_VERSION=3;
+    //TODO: update version
     static final String UTENTI_TABLE="UTENTI";
     static final String MAIL_UTENTE="mail";
     static final String PASSWORD_UTENTE="password";
@@ -49,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final String PRESTITO_CONCLUSO="concluso";
     private static final String CREATE_PRESTITI_TABLE_QUERY =
             "CREATE TABLE "+PRESTITI_TABLE+"("+IDU_PRESTITI+" VARCHAR(40) NOT NULL, "+ IDF_PRESTITI+ " INTEGER NOT NULL, "
-                    +DATA_PRESTITO+"TEXT NOT NULL, "+PRESTITO_CONCLUSO+"BOOLEAN DEFAULT 0," +
+                    +DATA_PRESTITO+" DATE, "+PRESTITO_CONCLUSO+" BOOLEAN DEFAULT 0," +
                     "FOREIGN KEY ("+IDU_PRESTITI+") REFERENCES "+UTENTI_TABLE+"("+MAIL_UTENTE+")," +
                     "FOREIGN KEY ("+IDF_PRESTITI+") REFERENCES "+FUMETTI_TABLE+"("+ID_FUMETTO+")," +
                     "PRIMARY KEY ("+IDU_PRESTITI+","+IDF_PRESTITI+"));" ;
@@ -67,10 +68,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_SERIE_TABLE_QUERY);
         db.execSQL(CREATE_FUMETTI_TABLE_QUERY);
         db.execSQL(CREATE_PRESTITI_TABLE_QUERY);
+
         db.execSQL("INSERT INTO "+SERIE_TABLE+ " ("+ TITOLO_SERIE+", "+ DESCRIZIONE_SERIE+ ")" +
                 " VALUES('Bluelock', 'Serie manga sul calcio come non lo avete mai visto, la ricerca del fenomeno che porterà il giappone alla vittoria del mondiale')");
         db.execSQL("INSERT INTO "+SERIE_TABLE+ " ("+ TITOLO_SERIE+", "+ DESCRIZIONE_SERIE+ ")" +
                 " VALUES('Batman', 'Il vigilante notturno più famoso di tutta Gotham city')");
+
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
                 " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
                 " VALUES('Bluelock 1', 'manga sportivo', NULL, 1, 0 )");
@@ -92,10 +95,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+FUMETTI_TABLE+ " ("+ TITOLO_FUMETTO+", "+ DESCRIZIONE_FUMETTO+ ", "+ IMMAGINE_COPERTINA+"," +
                 " "+  IDS_FUMETTO  +" , "+ DISPONIBILITA_FUMETTO + ")" +
                 " VALUES('Batman 96', 'fumetto DC comics', NULL, 2, 1 )");
+
         db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
                 " VALUES('admin@lifumetti.outlook.com', 'admin123', true)");
         db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
                 " VALUES('normaluser@gmail.com', 'example', false)");
+
+        db.execSQL("INSERT INTO "+PRESTITI_TABLE+" ("+IDU_PRESTITI+", "+IDF_PRESTITI+", "+DATA_PRESTITO+", "+PRESTITO_CONCLUSO+")"+
+                " VALUES('normaluser@gmail.com', 5, '2024-05-01', 1)");
     }
 
     @Override

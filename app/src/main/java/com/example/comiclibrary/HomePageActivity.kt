@@ -27,14 +27,14 @@ class HomePageActivity : AppCompatActivity() {
         binding=ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         cambiaFragment(if (userAdmin)
-            {HomeFragmentAdmin()}else{HomeFragment()})
+            {HomeFragmentAdmin(userID)}else{HomeFragment()})
         binding.menuNavBar.setOnItemSelectedListener {
             var fragment = when(it.itemId)
             {
                 R.id.home_nav_bar-> {
                     if (userAdmin)
                     {
-                        HomeFragmentAdmin()
+                        HomeFragmentAdmin(userID)
                     }else{
                         HomeFragment()
                     }
