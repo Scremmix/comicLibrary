@@ -31,4 +31,5 @@
     <string name="fumettoAvailableText">Disponibile</string>
     <string name="fumettoNotAvailableText">Non disponibile</string>
     <string name="fumettoBookedText">Prenotato</string>
+    <string name="noFumettoFound">Nessun risultato trovato</string>
 </resources>

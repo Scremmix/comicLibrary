@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,13 +62,21 @@ class RicercaFragment : Fragment() {
         recyclerView.layoutManager= LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         val fumettiList= mutableListOf<RecordFumetto>()
-        do{
-            val copertina = if(fumetti.isNull(0)) null else fumetti.getBlob(0)
-            fumettiList.add(RecordFumetto(copertina,
-                    fumetti.getString(1),
-                    fumetti.getString(2),
-                    fumetti.getInt(3)))
-        }while(fumetti.moveToNext())
+        if(fumetti.count>0) {
+            do {
+                val copertina = if (fumetti.isNull(0)) null else fumetti.getBlob(0)
+                fumettiList.add(
+                    RecordFumetto(
+                        copertina,
+                        fumetti.getString(1),
+                        fumetti.getString(2),
+                        fumetti.getInt(3)
+                    )
+                )
+            } while (fumetti.moveToNext())
+        }else{
+            Toast.makeText(view.context, view.context.getString(R.string.noFumettoFound), Toast.LENGTH_SHORT).show()
+        }
         val adapter= FumettiAdapter(fumettiList)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()

@@ -41,12 +41,17 @@ class HomeFragmentAdmin : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
         val utentiList= mutableListOf<RecordUtente>()
-        do{
-            utentiList.add(RecordUtente(utenti.getString(0),
-                utenti.getString(1),
-                utenti.getInt(2)==1
-            ))
-        }while(utenti.moveToNext())
+        if(utenti.count>0) {
+            do {
+                utentiList.add(
+                    RecordUtente(
+                        utenti.getString(0),
+                        utenti.getString(1),
+                        utenti.getInt(2) == 1
+                    )
+                )
+            } while (utenti.moveToNext())
+        }
         val adapter = UtentiAdapter(utentiList)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()
