@@ -14,85 +14,61 @@
             android:id="@+id/textView70"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:fontFamily="@font/actor"
-            android:text="@string/adminPopupHint"
+            android:text="@string/updteUserDataHint"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayouNPU"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayouNPU"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutNMU"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView70">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inserimentoNuovaMail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="4"
-                android:fontFamily="@font/actor"
-                android:hint="@string/updatedEmailHint"
-                android:maxEms="4" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayouNPU"
-            android:layout_width="350dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNMU">
+            app:layout_constraintTop_toBottomOf="@+id/textView70"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inserimentoNuovaPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="4"
-                android:fontFamily="@font/actor"
+                android:drawableLeft="@android:drawable/ic_lock_idle_lock"
                 android:hint="@string/updatedPasswordHint"
-                android:maxEms="4" />
+                android:inputType="textPassword"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/modificaUtenteAdminCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
             android:fontFamily="@font/actor"
             android:text="@string/registerAdminCheck"
             android:textColor="?attr/plainTextColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayouNPU"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayouNPU"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayouNPU" />
 
         <Button
             android:id="@+id/confirmChangesEditUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/actor"
             android:text="@string/adminPopupConfirm"
             android:textColor="?attr/buttonTextColor"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/modificaUtenteAdminCheck"
+            app:layout_constraintStart_toStartOf="@+id/modificaUtenteAdminCheck"
             app:layout_constraintTop_toBottomOf="@+id/modificaUtenteAdminCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

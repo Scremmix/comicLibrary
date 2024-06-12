@@ -2,7 +2,6 @@ package com.example.comiclibrary
 
 import android.database.Cursor
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class RicercaFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 if (!newText.equals(""))
                 {
-                    val risultato= db_manager.ricercaFumetto(newText)
+                    val risultato= db_manager.ricercaFumettoPerTitolo(newText)
                     mostraFumetti(risultato, view)
                     risultato.close()
                 }
@@ -47,7 +46,7 @@ class RicercaFragment : Fragment() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (!query.equals(""))
                 {
-                    val risultato= db_manager.ricercaFumetto(query)
+                    val risultato= db_manager.ricercaFumettoPerTitolo(query)
                     mostraFumetti(risultato, view)
                     risultato.close()
                 }

@@ -36,7 +36,6 @@ class ModificaUtenteFragment(var caller:UtentiAdapter, var email:String) : Dialo
     {
         caller.editUserCallBack(
             email,
-            view.findViewById<TextInputEditText>(R.id.inserimentoNuovaMail).text.toString(),
             view.findViewById<TextInputEditText>(R.id.inserimentoNuovaPassword).text.toString(),
             view.findViewById<CheckBox>(R.id.modificaUtenteAdminCheck).isChecked
         )

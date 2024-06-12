@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLDataException;
@@ -44,13 +43,12 @@ public class DatabaseManager {
         }
         return cursor;
     }
-    public int updateUser(String emailOld, String emailNew, String password, boolean administrator )
+    public int updateUser(String email, String password, boolean administrator )
     {
         ContentValues cv= new ContentValues();
-        cv.put(DatabaseHelper.MAIL_UTENTE,emailNew);
         cv.put(DatabaseHelper.PASSWORD_UTENTE,password);
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
-        return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "='"+ emailOld+"'", null );
+        return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "='"+ email+"'", null );
     }
     public boolean deleteUser(String email)
     {
@@ -99,13 +97,7 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.IDS_FUMETTO,idSerie);
         return database.update(DatabaseHelper.FUMETTI_TABLE, cv, DatabaseHelper.ID_FUMETTO + "="+ id, null );
     }
-
-    public static byte[] fromBitmapToByte(Bitmap bitmap) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-        return outputStream.toByteArray();
-    }
-    public Cursor ricercaFumetto(String parametro)
+    public Cursor ricercaFumettoPerTitolo(String parametro)
     {
         Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+
                         DatabaseHelper.TITOLO_FUMETTO +", S."+
@@ -118,5 +110,46 @@ public class DatabaseManager {
                 null);
         cursor.moveToFirst();
         return cursor;
+    }
+    public Cursor ricercaFumettiDisponibili()
+    {
+        Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+
+                        DatabaseHelper.TITOLO_FUMETTO +", S."+
+                        DatabaseHelper.TITOLO_SERIE+ ", F."+
+                        DatabaseHelper.DISPONIBILITA_FUMETTO+
+                        " FROM "+ DatabaseHelper.FUMETTI_TABLE+ " F JOIN "+
+                        DatabaseHelper.SERIE_TABLE+ " S ON F."+ DatabaseHelper.IDS_FUMETTO+ " = S."+
+                        DatabaseHelper.ID_SERIE+
+                        " WHERE F."+ DatabaseHelper.DISPONIBILITA_FUMETTO+ "=0",
+                null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+    public Cursor fumettiMancoList(String email)
+    {
+        Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+DatabaseHelper.TITOLO_FUMETTO+
+                ", S."+DatabaseHelper.TITOLO_SERIE+", F."+DatabaseHelper.DISPONIBILITA_FUMETTO+
+                " FROM "+DatabaseHelper.FUMETTI_TABLE+" F JOIN "+DatabaseHelper.SERIE_TABLE+" S"+
+                " ON F."+DatabaseHelper.IDS_FUMETTO+" =S."+DatabaseHelper.ID_SERIE+
+                "WHERE F."+DatabaseHelper.ID_FUMETTO+" NOT IN "+
+                        "(SELECT Fa."+DatabaseHelper.ID_FUMETTO+
+                        "FROM "+ DatabaseHelper.FUMETTI_TABLE +" Fa "+
+                        "JOIN "+DatabaseHelper.PRESTITI_TABLE+" Pa "+
+                        "ON Fa."+DatabaseHelper.ID_FUMETTO+" = Pa."+DatabaseHelper.IDF_PRESTITI+
+                        "WHERE Pa."+DatabaseHelper.IDU_PRESTITI+" = '"+email+"') "+
+                "AND F."+DatabaseHelper.IDS_FUMETTO+" IN "+
+                        "(SELECT Fb."+DatabaseHelper.IDS_FUMETTO+
+                        "FROM "+DatabaseHelper.FUMETTI_TABLE+" Fb "+
+                        "JOIN "+DatabaseHelper.PRESTITI_TABLE+" Pb "+
+                        "ON Fb."+DatabaseHelper.ID_FUMETTO+" = Pb."+DatabaseHelper.IDF_PRESTITI+
+                        "WHERE Pb.idUtente = '"+email+"')",
+                null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+    public static byte[] fromBitmapToByte(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
     }
 }

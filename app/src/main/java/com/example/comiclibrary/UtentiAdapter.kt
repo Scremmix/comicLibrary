@@ -52,18 +52,13 @@ class UtentiAdapter (private val dataSet: List<RecordUtente>, private val contex
     {
 
     }
-    fun editUserCallBack(emailOld:String, emailNew:String, password:String, admin:Boolean){
-        if(validEmail(emailNew))
-        {
-            val db=DatabaseManager(context)
-            db.open()
-            if(db.updateUser(emailOld, emailNew ,password,admin)==1){
-                Toast.makeText(context, context.getString(R.string.userUpdateSuccesful), Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(context, context.getString(R.string.userUpdateError), Toast.LENGTH_SHORT).show()
-            }
+    fun editUserCallBack(email:String, password:String, admin:Boolean){
+        val db=DatabaseManager(context)
+        db.open()
+        if(db.updateUser(email,password,admin)==1){
+            Toast.makeText(context, context.getString(R.string.userUpdateSuccesful), Toast.LENGTH_SHORT).show()
         }else{
-            Toast.makeText(context, context.getString(R.string.emailPatternMismatch), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.userUpdateError), Toast.LENGTH_SHORT).show()
         }
     }
     fun deleteUserCallBack(email:String, view:View){

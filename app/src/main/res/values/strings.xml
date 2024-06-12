@@ -35,8 +35,8 @@
     <string name="noFumettoFound">Search produced no results</string>
     <string name="editUserButton">Edit user</string>
     <string name="deleteUserButton">Delete user</string>
-    <string name="updatedEmailHint">New Email</string>
     <string name="updatedPasswordHint">New password</string>
     <string name="userUpdateSuccesful">User data updated</string>
     <string name="userUpdateError">Error on db</string>
+    <string name="updteUserDataHint">Update user data:</string>
 </resources>

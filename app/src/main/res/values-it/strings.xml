@@ -34,8 +34,8 @@
     <string name="noFumettoFound">Nessun risultato trovato</string>
     <string name="editUserButton">Modifica utente</string>
     <string name="deleteUserButton">Elimina utente</string>
-    <string name="updatedEmailHint">Nuovo indirizzo mail</string>
     <string name="updatedPasswordHint">Nuova password</string>
     <string name="userUpdateSuccesful">Dati utente aggornati</string>
     <string name="userUpdateError">Errore su database</string>
+    <string name="updteUserDataHint">Aggiorna dati utente:</string>
 </resources>
