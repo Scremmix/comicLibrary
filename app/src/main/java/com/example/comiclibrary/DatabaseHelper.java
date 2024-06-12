@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME="Database_fumetti";
-    static final int DATABASE_VERSION=3;
+    static final int DATABASE_VERSION=4;
     //TODO: update version
     static final String UTENTI_TABLE="UTENTI";
     static final String MAIL_UTENTE="mail";
@@ -100,9 +100,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " VALUES('admin@lifumetti.outlook.com', 'admin123', true)");
         db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
                 " VALUES('normaluser@gmail.com', 'example', false)");
+        db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
+                " VALUES('steve@lifumetti.outlook.com', 'steve123', true)");
+        db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
+                " VALUES('luca@gmail.com', 'Ciao123', false)");
+        db.execSQL("INSERT INTO "+ UTENTI_TABLE+ "("+ MAIL_UTENTE+ ", "+ PASSWORD_UTENTE+", " + TIPO_UTENTE +")" +
+                " VALUES('alessandro@gmail.com', 'Verde45', false)");
 
         db.execSQL("INSERT INTO "+PRESTITI_TABLE+" ("+IDU_PRESTITI+", "+IDF_PRESTITI+", "+DATA_PRESTITO+", "+PRESTITO_CONCLUSO+")"+
                 " VALUES('normaluser@gmail.com', 5, '2024-05-01', 1)");
+        db.execSQL("INSERT INTO "+PRESTITI_TABLE+" ("+IDU_PRESTITI+", "+IDF_PRESTITI+", "+DATA_PRESTITO+", "+PRESTITO_CONCLUSO+")"+
+                " VALUES('normaluser@gmail.com', 3 , '2024-05-31', 0)");
+        db.execSQL("INSERT INTO "+PRESTITI_TABLE+" ("+IDU_PRESTITI+", "+IDF_PRESTITI+", "+DATA_PRESTITO+", "+PRESTITO_CONCLUSO+")"+
+                " VALUES('luca@gmail.com', 2 , '2024-06-12', 1)");
+        db.execSQL("INSERT INTO "+PRESTITI_TABLE+" ("+IDU_PRESTITI+", "+IDF_PRESTITI+", "+DATA_PRESTITO+", "+PRESTITO_CONCLUSO+")"+
+                " VALUES('normaluser@gmail.com', 4 , '2024-05-20', 1)");
+
     }
 
     @Override
