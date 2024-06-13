@@ -50,29 +50,46 @@ class UtentiAdapter (private val dataSet: List<RecordUtente>, private val contex
     }
     fun onDeleteButtonClick(view:View, email: String)
     {
-
+        val showPopUP=EliminaUtenteFragment(this,email)
+        showPopUP.show(fragManager,"eliminaUtente_popUp")
     }
     fun editUserCallBack(email:String, password:String, admin:Boolean){
-        val db=DatabaseManager(context)
-        db.open()
-        if(db.updateUser(email,password,admin)==1){
-            Toast.makeText(context, context.getString(R.string.userUpdateSuccesful), Toast.LENGTH_SHORT).show()
-        }else{
-            Toast.makeText(context, context.getString(R.string.userUpdateError), Toast.LENGTH_SHORT).show()
+        if(!password.equals("")) {
+            val db = DatabaseManager(context)
+            db.open()
+            if (db.updateUser(email, password, admin) == 1) {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.userUpdateSuccesful),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.userUpdateError),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
-    fun deleteUserCallBack(email:String, view:View){
-
+    fun deleteUserCallBack(email:String){
+        val db = DatabaseManager(context)
+        db.open()
+        if (db.deleteUser(email) == 1) {
+            Toast.makeText(
+                context,
+                context.getString(R.string.userUpdateSuccesful),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            Toast.makeText(
+                context,
+                context.getString(R.string.userUpdateError),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
     override fun getItemCount(): Int {
         return dataSet.size
     }
-    fun validEmail(email:String):Boolean
-    {
-        val EMAIL_PATTERN = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
-        val pattern = Pattern.compile(EMAIL_PATTERN)
-        val matcher = pattern.matcher(email)
-        return matcher.matches()
-    }
-
 }

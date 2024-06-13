@@ -50,10 +50,9 @@ public class DatabaseManager {
         cv.put(DatabaseHelper.TIPO_UTENTE,administrator);
         return database.update(DatabaseHelper.UTENTI_TABLE, cv, DatabaseHelper.MAIL_UTENTE+ "='"+ email+"'", null );
     }
-    public boolean deleteUser(String email)
+    public int deleteUser(String email)
     {
-        database.delete(DatabaseHelper.UTENTI_TABLE, DatabaseHelper.MAIL_UTENTE+ "="+ email, null);
-        return true;
+        return database.delete(DatabaseHelper.UTENTI_TABLE, DatabaseHelper.MAIL_UTENTE+ "='"+ email+"'", null);
     }
     public boolean userIsAdmin(String email)
     {

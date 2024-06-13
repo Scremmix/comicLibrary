@@ -39,4 +39,8 @@
     <string name="userUpdateSuccesful">User data updated</string>
     <string name="userUpdateError">Error on db</string>
     <string name="updteUserDataHint">Update user data:</string>
+    <string name="deleteUserWarning">Are you sure you want to delete:</string>
+    <string name="deleteUserConfirm">Yes, I\'m sure</string>
+    <string name="passwordLostText">Forgot your password? Contact us at:</string>
+    <string name="adminEmail" translatable="false">admin@lifumetti.outlook.com</string>
 </resources>

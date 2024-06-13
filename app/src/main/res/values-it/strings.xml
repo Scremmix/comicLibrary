@@ -38,4 +38,7 @@
     <string name="userUpdateSuccesful">Dati utente aggornati</string>
     <string name="userUpdateError">Errore su database</string>
     <string name="updteUserDataHint">Aggiorna dati utente:</string>
+    <string name="deleteUserWarning">Sei sicuro di voler eliminare:</string>
+    <string name="deleteUserConfirm">Sì, sono sicuro</string>
+    <string name="passwordLostText">Password dimenticata? Contattaci a:</string>
 </resources>
