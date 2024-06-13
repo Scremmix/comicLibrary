@@ -27,7 +27,7 @@ class HomePageActivity : AppCompatActivity() {
         binding=ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         cambiaFragment(if (userAdmin)
-            {HomeFragmentAdmin(userID)}else{HomeFragment()})
+            {HomeFragmentAdmin(userID)}else{HomeFragment(userID)})
         binding.menuNavBar.setOnItemSelectedListener {
             var fragment = when(it.itemId)
             {
@@ -36,12 +36,12 @@ class HomePageActivity : AppCompatActivity() {
                     {
                         HomeFragmentAdmin(userID)
                     }else{
-                        HomeFragment()
+                        HomeFragment(userID)
                     }
                 }
                 R.id.search_nav_bar-> RicercaFragment()
                 R.id.profile_nav_bar-> ProfiloFragment()
-                else -> {HomeFragment()}
+                else -> {HomeFragment(userID)}
             }
             val bundle = Bundle()
             bundle.putString("userEmail", userID)

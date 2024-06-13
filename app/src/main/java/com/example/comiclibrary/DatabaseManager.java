@@ -112,10 +112,8 @@ public class DatabaseManager {
     }
     public Cursor ricercaFumettiDisponibili()
     {
-        Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+
-                        DatabaseHelper.TITOLO_FUMETTO +", S."+
-                        DatabaseHelper.TITOLO_SERIE+ ", F."+
-                        DatabaseHelper.DISPONIBILITA_FUMETTO+
+        Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+DatabaseHelper.TITOLO_FUMETTO +
+                        ", S."+DatabaseHelper.TITOLO_SERIE+ ", F."+DatabaseHelper.DISPONIBILITA_FUMETTO+
                         " FROM "+ DatabaseHelper.FUMETTI_TABLE+ " F JOIN "+
                         DatabaseHelper.SERIE_TABLE+ " S ON F."+ DatabaseHelper.IDS_FUMETTO+ " = S."+
                         DatabaseHelper.ID_SERIE+
@@ -130,18 +128,18 @@ public class DatabaseManager {
                 ", S."+DatabaseHelper.TITOLO_SERIE+", F."+DatabaseHelper.DISPONIBILITA_FUMETTO+
                 " FROM "+DatabaseHelper.FUMETTI_TABLE+" F JOIN "+DatabaseHelper.SERIE_TABLE+" S"+
                 " ON F."+DatabaseHelper.IDS_FUMETTO+" =S."+DatabaseHelper.ID_SERIE+
-                "WHERE F."+DatabaseHelper.ID_FUMETTO+" NOT IN "+
+                " WHERE F."+DatabaseHelper.ID_FUMETTO+" NOT IN "+
                         "(SELECT Fa."+DatabaseHelper.ID_FUMETTO+
-                        "FROM "+ DatabaseHelper.FUMETTI_TABLE +" Fa "+
+                        " FROM "+ DatabaseHelper.FUMETTI_TABLE +" Fa "+
                         "JOIN "+DatabaseHelper.PRESTITI_TABLE+" Pa "+
                         "ON Fa."+DatabaseHelper.ID_FUMETTO+" = Pa."+DatabaseHelper.IDF_PRESTITI+
-                        "WHERE Pa."+DatabaseHelper.IDU_PRESTITI+" = '"+email+"') "+
+                        " WHERE Pa."+DatabaseHelper.IDU_PRESTITI+" = '"+email+"') "+
                 "AND F."+DatabaseHelper.IDS_FUMETTO+" IN "+
                         "(SELECT Fb."+DatabaseHelper.IDS_FUMETTO+
-                        "FROM "+DatabaseHelper.FUMETTI_TABLE+" Fb "+
+                        " FROM "+DatabaseHelper.FUMETTI_TABLE+" Fb "+
                         "JOIN "+DatabaseHelper.PRESTITI_TABLE+" Pb "+
                         "ON Fb."+DatabaseHelper.ID_FUMETTO+" = Pb."+DatabaseHelper.IDF_PRESTITI+
-                        "WHERE Pb.idUtente = '"+email+"')",
+                        " WHERE Pb.idUtente = '"+email+"')",
                 null);
         cursor.moveToFirst();
         return cursor;

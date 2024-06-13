@@ -43,4 +43,6 @@
     <string name="deleteUserConfirm">Yes, I\'m sure</string>
     <string name="passwordLostText">Forgot your password? Contact us at:</string>
     <string name="adminEmail" translatable="false">admin@lifumetti.outlook.com</string>
+    <string name="mancoListLabel">From series you\'ve been reading lately:</string>
+    <string name="availableListLabel">Now available:</string>
 </resources>

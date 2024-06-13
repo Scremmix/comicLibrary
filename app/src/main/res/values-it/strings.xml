@@ -41,4 +41,6 @@
     <string name="deleteUserWarning">Sei sicuro di voler eliminare:</string>
     <string name="deleteUserConfirm">Sì, sono sicuro</string>
     <string name="passwordLostText">Password dimenticata? Contattaci a:</string>
+    <string name="mancoListLabel">Da serie che hai letto di recente:</string>
+    <string name="availableListLabel">Ora disponibili:</string>
 </resources>
