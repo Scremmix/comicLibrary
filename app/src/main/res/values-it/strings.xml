@@ -43,4 +43,5 @@
     <string name="passwordLostText">Password dimenticata? Contattaci a:</string>
     <string name="mancoListLabel">Da serie che hai letto di recente:</string>
     <string name="availableListLabel">Ora disponibili:</string>
+    <string name="CurrentlyYoursLabel">Attualmente tuoi:</string>
 </resources>

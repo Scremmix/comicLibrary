@@ -45,4 +45,5 @@
     <string name="adminEmail" translatable="false">admin@lifumetti.outlook.com</string>
     <string name="mancoListLabel">From series you\'ve been reading lately:</string>
     <string name="availableListLabel">Now available:</string>
+    <string name="CurrentlyYoursLabel">Currently yours:</string>
 </resources>

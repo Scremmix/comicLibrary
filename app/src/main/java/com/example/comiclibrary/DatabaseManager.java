@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.provider.ContactsContract;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLDataException;
@@ -122,6 +123,23 @@ public class DatabaseManager {
         cursor.moveToFirst();
         return cursor;
     }
+
+    public Cursor getBookedFumetti(String email)
+    {
+        Cursor cursor=database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+DatabaseHelper.TITOLO_FUMETTO+
+                ", S."+DatabaseHelper.TITOLO_SERIE+", F."+DatabaseHelper.DISPONIBILITA_FUMETTO+
+                " FROM "+DatabaseHelper.FUMETTI_TABLE+" F JOIN "+DatabaseHelper.SERIE_TABLE+" S "+
+                        "ON F."+DatabaseHelper.IDS_FUMETTO+" = S."+DatabaseHelper.ID_SERIE+
+                " WHERE F."+ DatabaseHelper.ID_FUMETTO +" IN "+
+                        "(SELECT Pa."+DatabaseHelper.IDF_PRESTITI+
+                                " FROM "+DatabaseHelper.PRESTITI_TABLE+ " Pa "+
+                        " WHERE Pa."+DatabaseHelper.IDU_PRESTITI+" = '"+email+"' "+
+                                "AND Pa."+DatabaseHelper.PRESTITO_CONCLUSO+" = false)"
+                ,null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
     public Cursor fumettiMancoList(String email)
     {
         Cursor cursor= database.rawQuery("SELECT F."+DatabaseHelper.IMMAGINE_COPERTINA+", F."+DatabaseHelper.TITOLO_FUMETTO+

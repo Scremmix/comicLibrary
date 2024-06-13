@@ -31,6 +31,9 @@ class HomeFragment(val userID:String) : Fragment() {
         val fumettiList=db_manager.fumettiMancoList(userID)
         mostraFumetti(fumettiList,view,R.id.mancoListFumettiRecycler)
         fumettiList.close()
+        val currentlyYoursList=db_manager.getBookedFumetti(userID)
+        mostraFumetti(currentlyYoursList,view,R.id.currentlyBookedFumetti)
+        currentlyYoursList.close()
         val availableList=db_manager.ricercaFumettiDisponibili()
         mostraFumetti(availableList,view,R.id.availableFumettiRecycler)
         availableList.close()
@@ -39,8 +42,8 @@ class HomeFragment(val userID:String) : Fragment() {
 
     fun mostraFumetti(fumetti: Cursor, view: View, idRecyclerView:Int) {
         val recyclerView= view.findViewById<RecyclerView>(idRecyclerView)
-        recyclerView.layoutManager= LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(false)
         val fumettiList= mutableListOf<RecordFumetto>()
         if(fumetti.count>0) {
             do {
@@ -55,7 +58,7 @@ class HomeFragment(val userID:String) : Fragment() {
                 )
             } while (fumetti.moveToNext())
         }
-        val adapter= FumettiAdapter(fumettiList)
+        val adapter = FumettiAdapter(fumettiList)
         recyclerView.adapter=adapter
         adapter.notifyDataSetChanged()
     }
@@ -68,6 +71,9 @@ class HomeFragment(val userID:String) : Fragment() {
         val fumettiList=db_manager.fumettiMancoList(userID)
         mostraFumetti(fumettiList,view,R.id.mancoListFumettiRecycler)
         fumettiList.close()
+        val currentlyYoursList=db_manager.getBookedFumetti(userID)
+        mostraFumetti(currentlyYoursList,view,R.id.currentlyBookedFumetti)
+        currentlyYoursList.close()
         val availableList=db_manager.ricercaFumettiDisponibili()
         mostraFumetti(availableList,view,R.id.availableFumettiRecycler)
         availableList.close()

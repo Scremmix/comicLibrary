@@ -1,5 +1,6 @@
 package com.example.comiclibrary;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,8 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME="Database_fumetti";
-    static final int DATABASE_VERSION=4;
-    //TODO: update version
+    static final int DATABASE_VERSION=7;
     static final String UTENTI_TABLE="UTENTI";
     static final String MAIL_UTENTE="mail";
     static final String PASSWORD_UTENTE="password";
@@ -44,16 +44,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     static final String PRESTITI_TABLE="PRESTITI";
+    static final String ID_PRESTITO="idPrestito";
     static final String IDU_PRESTITI="idUtente";
     static final String IDF_PRESTITI="idFumetto";
     static final String DATA_PRESTITO="dataPrestito";
     static final String PRESTITO_CONCLUSO="concluso";
     private static final String CREATE_PRESTITI_TABLE_QUERY =
-            "CREATE TABLE "+PRESTITI_TABLE+"("+IDU_PRESTITI+" VARCHAR(40) NOT NULL, "+ IDF_PRESTITI+ " INTEGER NOT NULL, "
-                    +DATA_PRESTITO+" DATE, "+PRESTITO_CONCLUSO+" BOOLEAN DEFAULT 0," +
+            "CREATE TABLE "+PRESTITI_TABLE+"("+ID_PRESTITO+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    IDU_PRESTITI+" VARCHAR(40) NOT NULL, "+ IDF_PRESTITI+ " INTEGER NOT NULL, "
+                    +DATA_PRESTITO+" VARHAR(10), "+PRESTITO_CONCLUSO+" BOOLEAN DEFAULT 0," +
                     "FOREIGN KEY ("+IDU_PRESTITI+") REFERENCES "+UTENTI_TABLE+"("+MAIL_UTENTE+")," +
-                    "FOREIGN KEY ("+IDF_PRESTITI+") REFERENCES "+FUMETTI_TABLE+"("+ID_FUMETTO+")," +
-                    "PRIMARY KEY ("+IDU_PRESTITI+","+IDF_PRESTITI+"));" ;
+                    "FOREIGN KEY ("+IDF_PRESTITI+") REFERENCES "+FUMETTI_TABLE+"("+ID_FUMETTO+"))";
 
 
 
