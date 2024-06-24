@@ -34,7 +34,7 @@ class FragmentAmministratore : DialogFragment()  {
         {
             (activity as RegisterActivity?)!!.amministratoreTrigg(view,true)
         }else{
-            Toast.makeText(this.context, "codice errato", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, getString(R.string.wrongAdminCode), Toast.LENGTH_SHORT).show()
             (activity as RegisterActivity?)!!.amministratoreTrigg(view,false)
         }
         dismiss()

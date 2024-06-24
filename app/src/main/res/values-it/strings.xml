@@ -44,4 +44,5 @@
     <string name="mancoListLabel">Da serie che hai letto di recente:</string>
     <string name="availableListLabel">Ora disponibili:</string>
     <string name="CurrentlyYoursLabel">Attualmente tuoi:</string>
+    <string name="wrongAdminCode">Codice errato</string>
 </resources>
